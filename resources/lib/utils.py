@@ -306,7 +306,7 @@ def send_event_notification(method, data=None, hexlify=False):
     if hexlify:
         # Used exclusively for the upnext plugin
         data = ensure_text(binascii.hexlify(ensure_binary(json.dumps(data))))
-    sender = 'plugin.video.jellycon'
+    sender = 'plugin.video.embycon'
     data = '"[%s]"' % json.dumps(data).replace('"', '\\"')
 
     xbmc.executebuiltin('NotifyAll(%s, %s, %s)' % (sender, method, data))

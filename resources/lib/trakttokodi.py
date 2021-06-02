@@ -16,15 +16,15 @@ log = LazyLogger(__name__)
 dataManager = DataManager()
 
 details_string = 'EpisodeCount,SeasonCount,Path,Etag,MediaStreams'
-icon = xbmc.translatePath('special://home/addons/plugin.video.jellycon/icon.png')
+icon = xbmc.translatePath('special://home/addons/plugin.video.embycon/icon.png')
 
 
 def not_found(content_string):
-    xbmcgui.Dialog().notification('JellyCon', '{}: {}'.format(string_load(30305), content_string), icon=icon, sound=False)
+    xbmcgui.Dialog().notification('embycon', '{}: {}'.format(string_load(30305), content_string), icon=icon, sound=False)
 
 
 def playback_starting(content_string):
-    xbmcgui.Dialog().notification('JellyCon', '{}: {}'.format(string_load(30306), content_string), icon=icon, sound=False)
+    xbmcgui.Dialog().notification('embycon', '{}: {}'.format(string_load(30306), content_string), icon=icon, sound=False)
 
 
 def search(item_type, query):
@@ -206,7 +206,7 @@ def entry_point(parameters):
                 playback_starting('{title} ({year}) - S{season}E{episode}'.format(title=title, year=year, season=str_season, episode=str_episode))
             else:
                 playback_starting('{title} ({year})'.format(title=title, year=year))
-            xbmc.executebuiltin('RunPlugin(plugin://plugin.video.jellycon/?mode=PLAY&item_id={item_id})'.format(item_id=play_item_id))
+            xbmc.executebuiltin('RunPlugin(plugin://plugin.video.embycon/?mode=PLAY&item_id={item_id})'.format(item_id=play_item_id))
 
     elif action == 'open':
         url = media_type = None
@@ -246,4 +246,4 @@ def entry_point(parameters):
                 not_found('{title} ({year}) - S{season}'.format(title=title, year=year, season=str_season))
 
         if url and media_type:
-            xbmc.executebuiltin('ActivateWindow(Videos, plugin://plugin.video.jellycon/?mode=GET_CONTENT&url={url}&media_type={media_type})'.format(url=quote(url), media_type=media_type))
+            xbmc.executebuiltin('ActivateWindow(Videos, plugin://plugin.video.embycon/?mode=GET_CONTENT&url={url}&media_type={media_type})'.format(url=quote(url), media_type=media_type))

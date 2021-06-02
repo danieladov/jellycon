@@ -44,7 +44,7 @@ def check_connection_speed():
     url = server + "/playback/bitratetest?size=%s" % test_data_size
 
     head = du.get_auth_header(True)
-    head["User-Agent"] = "JellyCon-" + ClientInformation().get_version()
+    head["User-Agent"] = "embycon-" + ClientInformation().get_version()
 
     request_details = {
         "stream": True,
@@ -56,7 +56,7 @@ def check_connection_speed():
 
     progress_dialog = xbmcgui.DialogProgress()
     message = 'Testing with {0} MB of data'.format(speed_test_data_size)
-    progress_dialog.create("JellyCon connection speed test", message)
+    progress_dialog.create("embycon connection speed test", message)
     start_time = time.time()
 
     log.debug("Starting Connection Speed Test")
@@ -422,11 +422,11 @@ def check_server(force=False, change_user=False, notify=False):
             home_window.clear_property("userid")
             home_window.clear_property("AccessToken")
             home_window.clear_property("userimage")
-            home_window.clear_property("jellycon_widget_reload")
+            home_window.clear_property("embycon_widget_reload")
             du = DownloadUtils()
             du.authenticate()
             du.get_user_id()
             xbmc.executebuiltin("ActivateWindow(Home)")
-            if "estuary_jellycon" in xbmc.getSkinDir():
+            if "estuary_embycon" in xbmc.getSkinDir():
                 xbmc.executebuiltin("SetFocus(9000, 0, absolute)")
             xbmc.executebuiltin("ReloadSkin()")

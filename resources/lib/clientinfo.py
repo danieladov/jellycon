@@ -24,7 +24,7 @@ class ClientInformation:
         if client_id:
             return client_id
 
-        jellyfin_guid_path = py2_decode(xbmc.translatePath("special://temp/jellycon_guid"))
+        jellyfin_guid_path = py2_decode(xbmc.translatePath("special://temp/embycon_guid"))
         log.debug("jellyfin_guid_path: {0}".format(jellyfin_guid_path))
         guid = xbmcvfs.File(jellyfin_guid_path)
         client_id = guid.read()
@@ -52,4 +52,4 @@ class ClientInformation:
 
     @staticmethod
     def get_client():
-        return 'Kodi JellyCon'
+        return 'Kodi embycon'

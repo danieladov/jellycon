@@ -14,7 +14,7 @@ from six.moves.urllib.parse import urlparse
 
 ##################################################################################################
 
-__addon__ = xbmcaddon.Addon(id='plugin.video.jellycon')
+__addon__ = xbmcaddon.Addon(id='plugin.video.embycon')
 __pluginpath__ = xbmc.translatePath(__addon__.getAddonInfo('path'))
 
 ##################################################################################################

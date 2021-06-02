@@ -51,7 +51,7 @@ dataManager = DataManager()
 
 @timer
 def main_entry_point():
-    log.debug("===== JellyCon START =====")
+    log.debug("===== embycon START =====")
 
     settings = xbmcaddon.Addon()
     profile_count = int(settings.getSetting('profile_count'))
@@ -63,7 +63,7 @@ def main_entry_point():
         pr.enable()
 
     log.debug("Running Python: {0}".format(sys.version_info))
-    log.debug("Running JellyCon: {0}".format(ClientInformation().get_version()))
+    log.debug("Running embycon: {0}".format(ClientInformation().get_version()))
     log.debug("Kodi BuildVersion: {0}".format(xbmc.getInfoLabel("System.BuildVersion")))
     log.debug("Kodi Version: {0}".format(kodi_version))
     log.debug("Script argument data: {0}".format(sys.argv))
@@ -125,11 +125,11 @@ def main_entry_point():
     elif mode == "WIDGET_CONTENT_CAST":
         get_widget_content_cast(int(sys.argv[1]), params)
     elif mode == "SHOW_CONTENT":
-        # plugin://plugin.video.jellycon?mode=SHOW_CONTENT&item_type=Movie|Series
+        # plugin://plugin.video.embycon?mode=SHOW_CONTENT&item_type=Movie|Series
         check_server()
         show_content(params)
     elif mode == "SEARCH":
-        # plugin://plugin.video.jellycon?mode=SEARCH
+        # plugin://plugin.video.embycon?mode=SEARCH
         xbmcplugin.setContent(int(sys.argv[1]), 'files')
         show_search()
     elif mode == "NEW_SEARCH":
@@ -150,8 +150,8 @@ def main_entry_point():
         else:
             log.info("Unable to find TV show parent ID.")
     else:
-        log.debug("JellyCon -> Mode: {0}".format(mode))
-        log.debug("JellyCon -> URL: {0}".format(param_url))
+        log.debug("embycon -> Mode: {0}".format(mode))
+        log.debug("embycon -> URL: {0}".format(param_url))
 
         if mode == "GET_CONTENT":
             get_content(param_url, params)
@@ -176,7 +176,7 @@ def main_entry_point():
         with open(tab_file_name, 'wb') as f:
             f.write(s.getvalue())
 
-    log.debug("===== JellyCon FINISHED =====")
+    log.debug("===== embycon FINISHED =====")
 
 
 def __enrich_url(param_url, params):
@@ -331,7 +331,7 @@ def get_params():
     param = {}
 
     # add plugin path
-    request_path = plugin_path.replace("plugin://plugin.video.jellycon", "")
+    request_path = plugin_path.replace("plugin://plugin.video.embycon", "")
     param["request_path"] = request_path
 
     if len(paramstring) >= 2:
@@ -349,7 +349,7 @@ def get_params():
             elif (len(splitparams)) == 3:
                 param[splitparams[0]] = splitparams[1] + "=" + splitparams[2]
 
-    log.debug("JellyCon -> Detected parameters: {0}".format(param))
+    log.debug("embycon -> Detected parameters: {0}".format(param))
     return param
 
 
@@ -628,7 +628,7 @@ def show_menu(params):
     elif selected_action == "show_extras":
         # "http://localhost:8096/Users/3138bed521e5465b9be26d2c63be94af/Items/78/SpecialFeatures"
         u = "{server}/Users/{userid}/Items/" + item_id + "/SpecialFeatures"
-        action_url = ("plugin://plugin.video.jellycon/?url=" + quote(u) + "&mode=GET_CONTENT&media_type=Videos")
+        action_url = ("plugin://plugin.video.embycon/?url=" + quote(u) + "&mode=GET_CONTENT&media_type=Videos")
         built_in_command = 'ActivateWindow(Videos, ' + action_url + ', return)'
         xbmc.executebuiltin(built_in_command)
 
@@ -644,7 +644,7 @@ def show_menu(params):
              '&IsMissing=false' +
              '&Fields=SpecialEpisodeNumbers,{field_filters}' +
              '&format=json')
-        action_url = ("plugin://plugin.video.jellycon/?url=" + quote(u) + "&mode=GET_CONTENT&media_type=Season")
+        action_url = ("plugin://plugin.video.embycon/?url=" + quote(u) + "&mode=GET_CONTENT&media_type=Season")
         built_in_command = 'ActivateWindow(Videos, ' + action_url + ', return)'
         xbmc.executebuiltin(built_in_command)
 
@@ -661,7 +661,7 @@ def show_menu(params):
              '&Fields={field_filters}' +
              '&format=json')
 
-        action_url = ("plugin://plugin.video.jellycon/?url=" + quote(u) + "&mode=GET_CONTENT&media_type=Series")
+        action_url = ("plugin://plugin.video.embycon/?url=" + quote(u) + "&mode=GET_CONTENT&media_type=Series")
 
         if xbmc.getCondVisibility("Window.IsActive(home)"):
             built_in_command = 'ActivateWindow(Videos, ' + action_url + ', return)'
@@ -966,7 +966,7 @@ def play_action(params):
     play_info["media_source_id"] = media_source_id
     play_info["subtitle_stream_index"] = subtitle_stream_index
     play_info["audio_stream_index"] = audio_stream_index
-    log.info("Sending jellycon_play_action : {0}".format(play_info))
+    log.info("Sending embycon_play_action : {0}".format(play_info))
     play_file(play_info)
 
 

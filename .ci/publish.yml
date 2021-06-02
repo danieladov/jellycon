@@ -8,7 +8,7 @@ steps:
       inputs:
         sshEndpoint: repository
         sourceFolder: '$(Build.ArtifactStagingDirectory)'
-        contents: 'plugin.video.jellycon-${{ py_version }}.zip'
+        contents: 'plugin.video.embycon-${{ py_version }}.zip'
         targetFolder: '/srv/repository/incoming/kodi'
 
     - task: SSH@0
@@ -16,7 +16,7 @@ steps:
       inputs:
         sshEndpoint: repository
         runOptions: 'commands'
-        commands: 'python3 /usr/local/bin/kodirepo add /srv/repository/incoming/kodi/plugin.video.jellycon-${{ py_version }}.zip --datadir /srv/repository/releases/client/kodi/${{ py_version }}'
+        commands: 'python3 /usr/local/bin/kodirepo add /srv/repository/incoming/kodi/plugin.video.embycon-${{ py_version }}.zip --datadir /srv/repository/releases/client/kodi/${{ py_version }}'
         failOnStdErr: false
 
     - task: SSH@0
@@ -24,4 +24,4 @@ steps:
       inputs:
         sshEndpoint: repository
         runOptions: 'commands'
-        commands: 'rm /srv/repository/incoming/kodi/plugin.video.jellycon-${{ py_version }}.zip'
+        commands: 'rm /srv/repository/incoming/kodi/plugin.video.embycon-${{ py_version }}.zip'

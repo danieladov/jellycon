@@ -468,7 +468,7 @@ class DownloadUtils:
         user_image = window.get_property("userimage")
 
         if userid:
-            log.debug("JellyCon DownloadUtils -> Returning saved UserID: {0}".format(userid))
+            log.debug("embycon DownloadUtils -> Returning saved UserID: {0}".format(userid))
             return userid
 
         settings = xbmcaddon.Addon()
@@ -508,7 +508,7 @@ class DownloadUtils:
             if auth_ok == "":
                 xbmcgui.Dialog().notification(string_load(30316),
                                               string_load(30044),
-                                              icon="special://home/addons/plugin.video.jellycon/icon.png")
+                                              icon="special://home/addons/plugin.video.embycon/icon.png")
                 return ""
             if not userid:
                 userid = window.get_property("userid")
@@ -519,7 +519,7 @@ class DownloadUtils:
         if userid == "":
             xbmcgui.Dialog().notification(string_load(30316),
                                           string_load(30045),
-                                          icon="special://home/addons/plugin.video.jellycon/icon.png")
+                                          icon="special://home/addons/plugin.video.embycon/icon.png")
 
         log.debug("userid: {0}".format(userid))
 
@@ -534,7 +534,7 @@ class DownloadUtils:
 
         token = window.get_property("AccessToken")
         if token is not None and token != "":
-            log.debug("JellyCon DownloadUtils -> Returning saved AccessToken: {0}".format(token))
+            log.debug("embycon DownloadUtils -> Returning saved AccessToken: {0}".format(token))
             return token
 
         settings = xbmcaddon.Addon()
@@ -585,7 +585,7 @@ class DownloadUtils:
         # remove some chars not valid for names
         device_name = device_name.replace("\"", "_")
         if len(device_name) == 0:
-            device_name = "JellyCon"
+            device_name = "embycon"
 
         headers = {}
         headers["Accept-encoding"] = "gzip"
@@ -604,7 +604,7 @@ class DownloadUtils:
             if auth_token != "":
                 headers["X-MediaBrowser-Token"] = auth_token
 
-            log.debug("JellyCon Authentication Header: {0}".format(headers))
+            log.debug("embycon Authentication Header: {0}".format(headers))
             return headers
 
     @timer
@@ -668,7 +668,7 @@ class DownloadUtils:
                 user_and_pass = b64encode(b"%s:%s" % (user_name, user_password)).decode("ascii")
                 head["Authorization"] = 'Basic %s' % user_and_pass
 
-            head["User-Agent"] = "JellyCon-" + ClientInformation().get_version()
+            head["User-Agent"] = "embycon-" + ClientInformation().get_version()
 
             http_request = getattr(requests, method.lower())
 
@@ -709,7 +709,7 @@ class DownloadUtils:
                 if suppress is False:
                     xbmcgui.Dialog().notification(string_load(30316),
                                                   '{}: {}'.format(string_load(30200), data.content),
-                                                  icon="special://home/addons/plugin.video.jellycon/icon.png")
+                                                  icon="special://home/addons/plugin.video.embycon/icon.png")
             try:
                 result = data.json()
             except:
@@ -721,4 +721,4 @@ class DownloadUtils:
             if not suppress:
                 xbmcgui.Dialog().notification(string_load(30316),
                                               str(msg),
-                                              icon="special://home/addons/plugin.video.jellycon/icon.png")
+                                              icon="special://home/addons/plugin.video.embycon/icon.png")
